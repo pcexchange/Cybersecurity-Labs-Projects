@@ -54,6 +54,13 @@ Built an isolated virtual network environment to practice security monitoring, t
 - Verified bidirectional communication between systems
 - Created foundation for future security monitoring exercises
 
+### Screenshots
+![WhatsApp Image 2026-01-23 at 5 46 04 AM](https://github.com/user-attachments/assets/f9d2bc1d-8526-4133-b5c2-771298baf396)
+![WhatsApp Image 2026-01-23 at 5 46 05 AM (1)](https://github.com/user-attachments/assets/087bfa67-eb93-4bb4-9c44-65f49be4e442)
+![WhatsApp Image 2026-01-23 at 5 46 05 AM](https://github.com/user-attachments/assets/ce9754ea-fc84-4783-837b-b7a1211f9da2)
+![WhatsApp Image 2026-01-23 at 5 46 06 AM](https://github.com/user-attachments/assets/23614048-1921-4b4a-a21e-1459ccff7bd7)
+
+
 ### Next Steps
 - Install and configure Wireshark for traffic analysis
 - Set up Windows event logging
