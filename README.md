@@ -81,3 +81,116 @@ Built an isolated virtual network environment to practice security monitoring, t
 - Cisco Junior Security Analyst Path (In Progress)
 - CompTIA Security+ (In Progress)
 - TryHackMe Pre-Security Path (In Progress)
+
+
+
+
+
+
+
+## Project 2: Windows Event Log Analysis
+
+*Date:* January 2026
+
+### Overview
+Learned to navigate and analyze Windows Security Event Logs to identify user activities, administrative actions, and potential security incidents. This is a foundational skill for SOC analysts who spend significant time reviewing logs for suspicious behavior.
+
+### Objectives
+- Understand Windows Event Viewer structure and navigation
+- Learn critical Event IDs for security monitoring
+- Practice filtering and analyzing security events
+- Identify normal vs. suspicious activity patterns
+
+### Tools & Technologies
+- Windows 11 Event Viewer
+- Security Event Logs
+- Event filtering and analysis
+
+### Key Event IDs Learned
+
+*Authentication & Access:*
+- *4624* - Successful account logon
+  - Logon Type 2: Interactive (physical login)
+  - Logon Type 3: Network access
+  - Logon Type 5: Service account
+  - Logon Type 10: Remote Desktop
+- *4625* - Failed logon attempt (important for detecting brute force attacks)
+- *4648* - Logon attempted with explicit credentials
+
+*Account Management:*
+- *4672* - Special privileges assigned to new logon (admin rights)
+- *4726* - User account was deleted
+
+*System Events:*
+- *1102* - Security audit log was cleared (potential evidence tampering)
+
+### Hands-On Activities
+
+1. *Navigated Windows Security Logs*
+   - Opened Event Viewer (eventvwr.msc)
+   - Located Security logs under Windows Logs
+   - Analyzed 4,225+ security events from fresh Windows 11 installation
+
+2. *Filtered Specific Event Types*
+   - Filtered for Event ID 4624 (successful logons): 547 events
+   - Filtered for Event ID 4672 (privileged access): 524 events
+   - Filtered for Event ID 4648 (explicit credentials): 26 events
+   - Distinguished between system accounts (SYSTEM, COMPUTER$) and actual user activity
+
+3. *Generated and Analyzed Security Events*
+   - Created new administrative user account
+   - Deleted old user account (Event ID 4726)
+   - Performed administrative password reset
+   - Observed corresponding security events in real-time
+
+### Challenge Encountered
+
+*Problem:* Lost access to primary user account due to forgotten password during testing.
+
+*Solution:* Accessed Windows Recovery Environment, used Command Prompt to activate built-in Administrator account (net user administrator /active:yes), gained system access, created new admin user, and deleted compromised account. All actions generated audit trail in Security logs.
+
+*Lesson Learned:* Even troubleshooting and recovery actions create security events. In a real SOC environment, these activities would need to be properly documented and justified. Also highlighted the importance of secure password management and the value of having multiple admin accounts for recovery scenarios.
+
+### Key Observations
+
+*Normal vs. Suspicious Patterns:*
+- Most security events (80%+) are automated system processes (services, scheduled tasks)
+- Real user activity represents a smaller subset requiring focused analysis
+- Event ID context matters: Same Event ID can indicate normal or suspicious activity depending on:
+  - Time of occurrence
+  - Account involved
+  - Frequency/patterns
+  - Associated events
+
+*Important for SOC Work:*
+- Filtering is essential - raw logs contain too much noise
+- Must understand difference between system accounts and user accounts
+- Event ID 1102 (log cleared) is a major red flag for incident response
+- Account creation/deletion events should always be investigated
+- Failed login attempts (4625) + successful login (4624) pattern often indicates credential attacks
+
+### Screenshots
+
+*Audit Log Cleared Event:*
+
+![Audit log cleared - Event ID 1102](![WhatsApp Image 2026-01-28 at 4 25 23 PM (1)](https://github.com/user-attachments/assets/91d09542-1ffd-4425-9aeb-26ef244a14e2)
+
+
+This event (1102) is generated when someone clears the Security log - a common technique attackers use to cover their tracks.
+
+### Skills Demonstrated
+- Windows Event Viewer navigation and analysis
+- Security log filtering and investigation
+- Event ID identification and interpretation
+- Distinguishing normal system activity from user actions
+- Understanding logon types and their security implications
+- Windows account management and recovery
+- Technical troubleshooting under constraints
+
+### Real-World Application
+These skills directly translate to SOC analyst responsibilities:
+- Investigating suspicious login attempts
+- Detecting privilege escalation
+- Identifying unauthorized account changes
+- Recognizing evidence tampering (log clearing)
+- Correlating multiple events to build incident timeline
